@@ -885,6 +885,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Aksi 3: Hapus Transaksi (DELETE ke Backend) ---
+    if (btnHapusTrx) {
+        btnHapusTrx.addEventListener('click', async () => {
+            if (!selectedTrxId) return;
+
+            const konfirmasi = confirm('Yakin ingin menghapus data ini secara permanen dari Database?');
+            if (!konfirmasi) return;
+
+            btnHapusTrx.disabled = true;
+
+            try {
+                const response = await fetch(`${API_URL}/${selectedTrxId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Gagal menghapus data (status: ${response.status})`);
+                }
+
+                modalDetail.classList.add('hidden');
+                selectedTrxId = null;
+
+                await renderRiwayat();
+                await renderGrafik();
+                await renderLaporan();
+
+                alert('Data berhasil dihapus dari Database!');
+            } catch (error) {
+                console.error('Error DELETE transaksi:', error);
+                alert('Terjadi kesalahan saat menghapus data.');
+            } finally {
+                btnHapusTrx.disabled = false;
+            }
+        });
+    }
+
     // --- Aksi 4: Edit / Revisi Data Transaksi (PUT ke Backend) ---
     if (editNoWa) {
         editNoWa.addEventListener('input', () => {
