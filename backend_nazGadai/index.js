@@ -21,7 +21,7 @@ const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  database: process.env.DB_NAME,
   port: process.env.DB_PORT || 3306,
   ssl: {
     minVersion: 'TLSv1.2',
@@ -123,4 +123,5 @@ app.delete('/api/gadai/:id', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server aktif di http://localhost:${PORT}`);
+  module.exports = app;
 });
