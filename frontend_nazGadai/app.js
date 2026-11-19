@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // };
 
     // URL Endpoint Backend Node.js + Express
-    const API_URL = 'https://naz-gadai-api.vercel.app';
+    const API_URL = 'https://naz-gadai-api.vercel.app/api/gadai';
 
     // STORAGE_KEYS kini hanya menyimpan sesi login di browser
     const STORAGE_KEYS = {
